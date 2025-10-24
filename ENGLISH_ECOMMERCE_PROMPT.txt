@@ -1,0 +1,201 @@
+# Build an English E-commerce Website using Next.js
+
+I want to build a professional English e-commerce website using Next.js 15 with App Router and TypeScript. The website should be fully responsive and support English language with LTR layout.
+
+## Basic Requirements:
+
+### 1. Technical Stack:
+- **Framework**: Next.js 15 with App Router
+- **Language**: TypeScript 5
+- **Styling**: Tailwind CSS 4 with shadcn/ui components
+- **Database**: Prisma ORM with SQLite
+- **Icons**: Lucide React
+- **State Management**: Zustand
+- **Data Fetching**: TanStack Query
+
+### 2. Homepage Structure:
+- Header with logo, navigation menu, shopping cart icon, and dark/light mode toggle
+- Hero section with attractive headline and image
+- Products section with:
+  - Search bar
+  - Filters by category and price
+  - Sort by price and rating
+  - Responsive product grid
+- Footer with useful links
+
+### 3. Product Components:
+- Product Card with:
+  - Product image
+  - Product name
+  - Price
+  - Star rating
+  - "Add to Cart" button
+- Product Details Modal with:
+  - Image gallery
+  - Complete information
+  - Quantity selector
+  - Add to Cart button
+
+### 4. Product Data:
+Use this static product data:
+
+```javascript
+const products = [
+  {
+    id: 1,
+    name: "Dell XPS 13 Laptop",
+    category: "electronics",
+    price: 1499,
+    rating: 4.5,
+    reviews: 128,
+    image: "/api/placeholder/300/300",
+    description: "Ultra-light and high-performance laptop with crystal-clear display",
+    inStock: true,
+    features: ["13.4-inch display", "Intel Core i7 processor", "16GB RAM", "512GB SSD"]
+  },
+  {
+    id: 2,
+    name: "Apple Watch Series 8",
+    category: "electronics",
+    price: 399,
+    rating: 4.8,
+    reviews: 256,
+    image: "/api/placeholder/300/300",
+    description: "Advanced smartwatch with health and fitness features",
+    inStock: true,
+    features: ["Retina display", "Heart monitoring", "Built-in GPS", "Water resistant"]
+  },
+  {
+    id: 3,
+    name: "Sony WH-1000XM4 Headphones",
+    category: "electronics",
+    price: 349,
+    rating: 4.7,
+    reviews: 189,
+    image: "/api/placeholder/300/300",
+    description: "Wireless headphones with advanced noise cancellation",
+    inStock: true,
+    features: ["Noise cancellation", "30-hour battery", "High-quality sound", "Comfortable for long use"]
+  },
+  {
+    id: 4,
+    name: "Canon EOS R5 Camera",
+    category: "electronics",
+    price: 3899,
+    rating: 4.9,
+    reviews: 97,
+    image: "/api/placeholder/300/300",
+    description: "Professional camera with 45-megapixel resolution",
+    inStock: false,
+    features: ["45 megapixels", "8K video recording", "Advanced image stabilization", "WiFi and Bluetooth"]
+  },
+  {
+    id: 5,
+    name: "Samsung Galaxy S23 Ultra",
+    category: "electronics",
+    price: 1199,
+    rating: 4.6,
+    reviews: 342,
+    image: "/api/placeholder/300/300",
+    description: "Flagship smartphone with S Pen and professional camera",
+    inStock: true,
+    features: ["6.8-inch display", "200MP camera", "5000mAh battery", "S Pen"]
+  },
+  {
+    id: 6,
+    name: "iPad Pro 12.9",
+    category: "electronics",
+    price: 1099,
+    rating: 4.8,
+    reviews: 178,
+    image: "/api/placeholder/300/300",
+    description: "Professional tablet with Liquid Retina XDR display",
+    inStock: true,
+    features: ["12.9-inch display", "M2 processor", "Apple Pencil support", "128GB storage"]
+  },
+  {
+    id: 7,
+    name: "AirPods Pro 2",
+    category: "electronics",
+    price: 249,
+    rating: 4.5,
+    reviews: 423,
+    image: "/api/placeholder/300/300",
+    description: "Wireless earbuds with effective noise cancellation",
+    inStock: true,
+    features: ["Noise cancellation", "6-hour battery", "Water resistant", "Wireless charging"]
+  },
+  {
+    id: 8,
+    name: "LG OLED 55-inch TV",
+    category: "electronics",
+    price: 1799,
+    rating: 4.7,
+    reviews: 89,
+    image: "/api/placeholder/300/300",
+    description: "OLED TV with 4K technology and stunning picture quality",
+    inStock: true,
+    features: ["55-inch 4K", "OLED technology", "HDR support", "Smart platforms"]
+  }
+];
+```
+
+### 5. Categories:
+```javascript
+const categories = [
+  { id: "all", name: "All", icon: Grid3X3 },
+  { id: "electronics", name: "Electronics", icon: Smartphone },
+  { id: "fashion", name: "Fashion", icon: Shirt },
+  { id: "home", name: "Home", icon: Home },
+  { id: "sports", name: "Sports", icon: Trophy },
+  { id: "books", name: "Books", icon: BookOpen }
+];
+```
+
+### 6. UI Features:
+- Full English language support (LTR)
+- Responsive design (Mobile-first)
+- Dark/light mode
+- Smooth animations
+- Loading states and error handling
+- Toast notifications for alerts
+
+### 7. Important Notes:
+- Use 'use client' for components that need interactivity
+- Use 'next-themes' for dark/light mode
+- Use 'sonner' for toast notifications
+- Use 'framer-motion' for animations
+- Ensure all components work correctly before adding them to the main page
+- Don't add complex components like CartSidebar or Dialog until you've verified they work independently
+
+### 8. Suggested File Structure:
+```
+src/
+├── app/
+│   ├── page.tsx
+│   ├── layout.tsx
+│   └── globals.css
+├── components/
+│   ├── ui/ (shadcn/ui components)
+│   ├── header.tsx
+│   ├── hero.tsx
+│   ├── product-card.tsx
+│   ├── product-details.tsx
+│   ├── filters.tsx
+│   └── footer.tsx
+├── lib/
+│   ├── utils.ts
+│   └── stores.ts
+└── types/
+    └── index.ts
+```
+
+### 9. Required Steps:
+1. Set up the project and dependencies
+2. Build basic components independently
+3. Test each component individually
+4. Assemble components in the main page
+5. Add interactive features (search, filter, sort)
+6. Comprehensive website testing
+
+The goal is to create a professional English e-commerce website that's user-friendly and works perfectly on all devices.

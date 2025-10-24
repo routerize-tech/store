@@ -1,0 +1,204 @@
+# طلب بناء متجر إلكتروني عربي باستخدام Next.js
+
+أريد بناء متجر إلكتروني عربي احترافي باستخدام Next.js 15 مع App Router و TypeScript. المتجر يجب أن يكون متجاوب بالكامل ويدعم اللغة العربية من اليمين إلى اليسار.
+
+## المتطلبات الأساسية:
+
+### 1. الهيكل التقني:
+- **Framework**: Next.js 15 مع App Router
+- **Language**: TypeScript 5
+- **Styling**: Tailwind CSS 4 مع shadcn/ui components
+- **Database**: Prisma ORM مع SQLite
+- **Icons**: Lucide React
+- **State Management**: Zustand
+- **Data Fetching**: TanStack Query
+
+### 2. الصفحة الرئيسية:
+- Header مع شعار، قائمة تنقل، أيقونة سلة التسوق، ووضع الظلام/النور
+- Hero section مع عنوان جذاب وصورة
+- قسم المنتجات مع:
+  - شريط بحث
+  - فلاتر حسب الفئة والسعر
+  - ترتيب حسب السعر والتقييم
+  - شبكة منتجات متجاوبة
+- Footer مع روابط مفيدة
+
+### 3. مكونات المنتج:
+- Product Card مع:
+  - صورة المنتج
+  - اسم المنتج
+  - السعر
+  - التقييم بالنجوم
+  - زر "إضافة للسلة"
+- Product Details Modal مع:
+  - معرض صور
+  - معلومات كاملة
+  - اختيار الكمية
+  - زر إضافة للسلة
+
+### 4. بيانات المنتجات:
+استخدم هذه البيانات الثابتة للمنتجات:
+
+```javascript
+const products = [
+  {
+    id: 1,
+    name: "لابتوب Dell XPS 13",
+    category: "electronics",
+    price: 4500,
+    rating: 4.5,
+    reviews: 128,
+    image: "/api/placeholder/300/300",
+    description: "لابتوب فائق الخفة والأداء مع شاشة كريستالية واضحة",
+    inStock: true,
+    features: ["شاشة 13.4 بوصة", "معالج Intel Core i7", "16GB RAM", "512GB SSD"]
+  },
+  {
+    id: 2,
+    name: "ساعة ذكية Apple Watch Series 8",
+    category: "electronics",
+    price: 1800,
+    rating: 4.8,
+    reviews: 256,
+    image: "/api/placeholder/300/300",
+    description: "ساعة ذكية متطورة مع ميزات صحية ورياضية",
+    inStock: true,
+    features: ["شاشة Retina", "مراقبة القلب", "GPS مدمج", "مقاومة الماء"]
+  },
+  {
+    id: 3,
+    name: "سماعات Sony WH-1000XM4",
+    category: "electronics",
+    price: 1200,
+    rating: 4.7,
+    reviews: 189,
+    image: "/api/placeholder/300/300",
+    description: "سماعات لاسلكية مع إلغاء ضوضاء متقدم",
+    inStock: true,
+    features: ["إلغاء ضوضاء", "30 ساعة بطارية", "صوت عالي الجودة", "مريحة للاستخدام الطويل"]
+  },
+  {
+    id: 4,
+    name: "كاميرا Canon EOS R5",
+    category: "electronics",
+    price: 22000,
+    rating: 4.9,
+    reviews: 97,
+    image: "/api/placeholder/300/300",
+    description: "كاميرا احترافية بدقة 45 ميجابكسل",
+    inStock: false,
+    features: ["45 ميجابكسل", "تسجيل فيديو 8K", "تثبيت صورة متقدم", "WiFi و Bluetooth"]
+  },
+  {
+    id: 5,
+    name: "هاتف Samsung Galaxy S23 Ultra",
+    category: "electronics",
+    price: 4800,
+    rating: 4.6,
+    reviews: 342,
+    image: "/api/placeholder/300/300",
+    description: "هاتف ذكي رائد مع قلم S Pen وكاميرا احترافية",
+    inStock: true,
+    features: ["شاشة 6.8 بوصة", "200 ميجابكسل كاميرا", "5000mAh بطارية", "S Pen"]
+  },
+  {
+    id: 6,
+    name: "جهاز iPad Pro 12.9",
+    category: "electronics",
+    price: 3500,
+    rating: 4.8,
+    reviews: 178,
+    image: "/api/placeholder/300/300",
+    description: "جهاز لوحي احترافي مع شاشة Liquid Retina XDR",
+    inStock: true,
+    features: ["شاشة 12.9 بوصة", "معالج M2", "دعم Apple Pencil", "تخزين 128GB"]
+  },
+  {
+    id: 7,
+    name: "سماعات AirPods Pro 2",
+    category: "electronics",
+    price: 750,
+    rating: 4.5,
+    reviews: 423,
+    image: "/api/placeholder/300/300",
+    description: "سماعات لاسلكية مع إلغاء ضوضاء فعال",
+    inStock: true,
+    features: ["إلغاء ضوضاء", "6 ساعات بطارية", "مقاومة الماء", "شحن لاسلكي"]
+  },
+  {
+    id: 8,
+    name: "شاشة LG OLED 55 بوصة",
+    category: "electronics",
+    price: 6500,
+    rating: 4.7,
+    reviews: 89,
+    image: "/api/placeholder/300/300",
+    description: "تلفزيون OLED بتقنية 4K وجودة صورة مذهلة",
+    inStock: true,
+    features: ["55 بوصة 4K", "تقنية OLED", "دعم HDR", "منصات ذكية"]
+  }
+];
+```
+
+### 5. الفئات:
+```javascript
+const categories = [
+  { id: "all", name: "الكل", icon: Grid3X3 },
+  { id: "electronics", name: "إلكترونيات", icon: Smartphone },
+  { id: "fashion", name: "أزياء", icon: Shirt },
+  { id: "home", name: "منزل", icon: Home },
+  { id: "sports", name: "رياضة", icon: Trophy },
+  { id: "books", name: "كتب", icon: BookOpen }
+];
+```
+
+### 6. ميزات الواجهة:
+- دعم كامل للغة العربية (RTL)
+- تصميم متجاوب (Mobile-first)
+- وضع الظلام والنور
+- رسوم متحركة سلسة
+- Loading states و error handling
+- Toast notifications للتنبيهات
+
+### 7. ملاحظات هامة:
+- استخدم 'use client' للمكونات التي تحتاج تفاعل
+- استخدم 'next-themes' لوضع الظلام/النور
+- استخدم 'sonner' للـ toast notifications
+- استخدم 'framer-motion' للرسوم المتحركة
+- تأكد من أن كل المكونات تعمل بشكل صحيح قبل إضافتها للصفحة الرئيسية
+- لا تضف مكونات معقدة مثل CartSidebar أو Dialog إلا بعد التأكد من عملها بشكل مستقل
+
+### 8. هيكل الملفات المقترح:
+```
+src/
+├── app/
+│   ├── page.tsx
+│   ├── layout.tsx
+│   └── globals.css
+├── components/
+│   ├── ui/ (shadcn/ui components)
+│   ├── header.tsx
+│   ├── hero.tsx
+│   ├── product-card.tsx
+│   ├── product-details.tsx
+│   ├── filters.tsx
+│   └── footer.tsx
+├── lib/
+│   ├── utils.ts
+│   └── stores.ts
+└── types/
+    └── index.ts
+```
+
+### 9. الخطوات المطلوبة:
+1. إعداد المشروع والاعتماديات
+2. بناء المكونات الأساسية بشكل منفصل
+3. اختبار كل مكون على حدة
+4. تجميع المكونات في الصفحة الرئيسية
+5. إضافة الميزات التفاعلية (بحث، فلترة، ترتيب)
+6. اختبار شامل للموقع
+
+الهدف هو إنشاء متجر إلكتروني عربي احترافي وسهل الاستخدام يعمل بشكل مثالي على جميع الأجهزة.
+
+---
+**ملاحظة:** هذا الملف يحتوي على جميع المتطلبات اللازمة لبناء متجر إلكتروني عربي احترافي. يمكن استخدامه مع أي مساعد ذكاء اصطناعي لإعادة بناء المشروع.

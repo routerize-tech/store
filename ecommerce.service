@@ -1,0 +1,33 @@
+[Unit]
+Description=E-commerce Website Next.js Application
+Documentation=https://github.com/your-username/ecommerce-website
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+WorkingDirectory=/var/www/ecommerce
+ExecStart=/usr/bin/npm start
+ExecReload=/bin/kill -USR2 $MAINPID
+Restart=always
+RestartSec=10
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=ecommerce
+Environment=NODE_ENV=production
+Environment=PORT=3000
+
+# Security settings
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/www/ecommerce/.next
+ReadWritePaths=/var/www/ecommerce/node_modules/.cache
+
+# Resource limits
+LimitNOFILE=65536
+LimitNPROC=4096
+
+[Install]
+WantedBy=multi-user.target
